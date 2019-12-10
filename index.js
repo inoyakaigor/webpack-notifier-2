@@ -1,6 +1,5 @@
 var stripANSI = require('strip-ansi');
 var path = require('path');
-var objectAssign = require('object-assign');
 var os = require('os');
 var notifier = require('node-notifier');
 
@@ -12,22 +11,22 @@ var WebpackNotifierPlugin = module.exports = function(options) {
     this.isFirstBuild = true;
 };
 
-WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
-    function findFirstDFS(compilation, key) {
-        var match = compilation[key][0];
+function findFirstDFS(compilation, key) {
+    var match = compilation[key][0];
+    if (match) {
+        return match;
+    }
+
+    var children = compilation.children;
+    for (var i = 0; i < children.length; ++i) {
+        match = findFirstDFS(children[i], key);
         if (match) {
             return match;
         }
-
-        var children = compilation.children;
-        for (var i = 0; i < children.length; ++i) {
-            match = findFirstDFS(children[i], key);
-            if (match) {
-                return match;
-            }
-        }
     }
+}
 
+WebpackNotifierPlugin.prototype.compileEndOptions = function(stats) {
     if (this.isFirstBuild) {
         this.isFirstBuild = false;
 
@@ -36,16 +35,39 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
         }
     }
 
+    var imageFromOptions = ('contentImage' in this.options)
+    ? this.options.contentImage
+    : DEFAULT_LOGO;
+
+    var successImage = '';
+    var warningsImage = '';
+    var errorsImage = '';
+    if (typeof imageFromOptions == 'object') {
+        successImage = imageFromOptions['success']
+        warningsImage = imageFromOptions['warning']
+        errorsImage = imageFromOptions['error']
+    }
+
     var error;
+    var contentImage;
+    var status;
     if (stats.hasErrors()) {
         error = findFirstDFS(stats.compilation, 'errors');
+        contentImage = errorsImage;
+        status = 'error'
 
     } else if (stats.hasWarnings() && !this.options.excludeWarnings && !this.options.onlyOnError) {
         error = findFirstDFS(stats.compilation, 'warnings');
+        contentImage = warningsImage;
+        status = 'warning'
 
     } else if ((!this.lastBuildSucceeded || this.options.alwaysNotify) && !this.options.onlyOnError) {
         this.lastBuildSucceeded = true;
-        return (hasEmoji ? '✅ ' : '') + 'Build successful';
+        return {
+            message: (hasEmoji ? '✅ ' : '') + 'Build successful',
+            contentImage: successImage,
+            status: 'success'
+        };
 
     } else {
         return;
@@ -66,35 +88,42 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
         message = (hasEmoji ? '⚠️ ' : '') + 'Warning: ' + message + error.message.toString();
     }
 
-    return stripANSI(message);
+    return {
+        message: stripANSI(message),
+        contentImage: contentImage,
+        status: status
+    }
 };
 
 WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
-    var msg = this.compileMessage(stats);
-    if (msg) {
-        var contentImage = ('contentImage' in this.options) ?
-            this.options.contentImage : DEFAULT_LOGO;
-
+    var {message, contentImage, status} = this.compileEndOptions(stats);
+    if (message) {
         var title = this.options.title
         if (typeof title === 'function') {
-            title = title({msg: msg})
+            title = title({message: message, status: status})
         }
 
-        notifier.notify(objectAssign({
-            title: 'Webpack',
-            message: msg,
-            contentImage: contentImage,
-            icon: (os.platform() === 'win32' || os.platform() === 'linux') ? contentImage : undefined
-        }, this.options, { title: title }));
+        notifier.notify(Object.assign(
+            {
+                title: 'Webpack',
+                message: message,
+                contentImage: contentImage,
+                icon: (os.platform() === 'win32' || os.platform() === 'linux') ? contentImage : undefined
+            },
+            this.options,
+            {
+                title: title,
+            }
+        ));
     }
 };
 
 WebpackNotifierPlugin.prototype.apply = function(compiler) {
-  if (compiler.hooks) {
-    var plugin = { name: 'Notifier' };
+    if (compiler.hooks) {
+        var plugin = { name: 'Notifier' };
 
-    compiler.hooks.done.tap(plugin, this.compilationDone.bind(this));
-  } else {
-    compiler.plugin('done', this.compilationDone.bind(this));
-  }
+        compiler.hooks.done.tap(plugin, this.compilationDone.bind(this));
+    } else {
+        compiler.plugin('done', this.compilationDone.bind(this));
+    }
 };
