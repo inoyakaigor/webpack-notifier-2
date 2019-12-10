@@ -1,5 +1,5 @@
 {
-  "name": "webpack-notifier",
+  "name": "webpack-notifier-2",
   "version": "1.8.0",
   "description": "webpack + node-notifier = build status system notifications",
   "main": "index.js",
@@ -20,13 +20,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Turbo87/webpack-notifier.git"
+    "url": "https://github.com/inoyakaigor/webpack-notifier.git"
   },
   "author": "Tobias Bieniek <tobias.bieniek@gmx.de>",
   "license": "ISC",
   "dependencies": {
     "node-notifier": "^6.0.0",
-    "object-assign": "^4.1.0",
     "strip-ansi": "^3.0.1"
   },
   "devDependencies": {
