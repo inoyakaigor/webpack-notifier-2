@@ -10,6 +10,8 @@ display build status system notifications to the user.
 ![webpack-notifier screenshot](screenshot.png)
 
 > This is a fork of the
+[webpack-notifier](https://github.com/Turbo87/webpack-notifier)
+which is a fork of the
 [webpack-error-notification](https://github.com/vsolovyov/webpack-error-notification)
 plugin. It adds support for Windows and there is no need to manually install
 the `terminal-notifier` package on OS X anymore.
@@ -58,14 +60,48 @@ Title shown in the notification.
 new WebpackNotifierPlugin({title: 'Webpack'});
 ```
 
-### Content Image
+### Dynamic title
 
-Image shown in the notification.
+Your own title for notify
 
 ```js
 var path = require('path');
 
+new WebpackNotifierPlugin({title: function (params) {
+  return `Build status is ${params.status} with message ${params.message}`;
+}});
+```
+
+### Emojis in message text
+
+```js
+var path = require('path');
+
+new WebpackNotifierPlugin({emoji: true});
+```
+
+### Content Image
+
+Image shown in the notification. Can be a path string or object with paths.
+
+String path:
+```js
+var path = require('path');
+
 new WebpackNotifierPlugin({contentImage: path.join(__dirname, 'logo.png')});
+```
+
+Object string path:
+```js
+var path = require('path');
+
+const statusesPaths = {
+  success: path.join(__dirname, 'success.png')
+  warning: path.join(__dirname, 'warning.png')
+  error: path.join(__dirname, 'error.png')
+}
+
+new WebpackNotifierPlugin({contentImage: statusesPaths});
 ```
 
 ### Exclude Warnings
