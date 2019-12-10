@@ -1,6 +1,6 @@
 {
   "name": "webpack-notifier-2",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "webpack + node-notifier = build status system notifications",
   "main": "index.js",
   "files": [
@@ -26,9 +26,9 @@
   "license": "ISC",
   "dependencies": {
     "node-notifier": "^6.0.0",
-    "strip-ansi": "^3.0.1"
+    "strip-ansi": "^6.0.0"
   },
   "devDependencies": {
-    "eslint": "^3.3.1"
+    "eslint": "^6.7.2"
   }
 }

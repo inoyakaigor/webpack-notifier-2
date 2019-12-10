@@ -9,7 +9,7 @@ v2.0.0
 - Add support for title function for dynamic titles ([#53](https://github.com/Turbo87/webpack-notifier/pull/53)
 - Update node-notifier to v6 ([#56](https://github.com/Turbo87/webpack-notifier/pull/56)
 
-Minimum supported Node version is 6+
+Minimum supported Node version is 8.3+
 
 
 v1.8.0

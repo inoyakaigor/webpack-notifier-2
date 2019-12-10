@@ -1,14 +1,11 @@
 language: node_js
 node_js:
-  - "6"
-
-sudo: false
-
+- 8.3
 deploy:
   provider: npm
-  email: tobias.bieniek@gmx.de
+  email: inoyakaigor@ya.ru
   api_key:
-    secure: GadahtMR6nr/y/9FdkcPBdiQR636YG57je45wh+lKR0aOTaEHmXWxbrXxmwvu7bzXTKnCeQC2agxQdiZHNM2KoFoPgjeFBIX+C/KAT2A0XSlp8fiimN8Kq4kXvMulXcb8SD7gQp4bR1WR8Jya1LBDp+xtABRPxOrmp8jHBZZKg8=
+    secure: B1+Nevjh/aIlAeD6yqpMQ1V0YzXUPNEBal/oT1ZIfE2FXQvd7J4asA5CO5Q9S3HcDrLfADWI/SSbBXgUppi7KrTFzLMph3ayJAHVrkRsxTSJQR1ICcwlgcfbAjAdzE1I4d8TP/k6bdlbwWTIXVIppBbQ8lBya1cWcMG3Z8XXOBRryfOzt14dd625CJtBMjiQ274Gy7taJ/HWX+DXBiS+/c2br4T+jNmYbL0iEnOCqEGBVY6jJtCbobZyB2yXOUI/Ybv6nMywX6pQb3BuhqoS4DEj85ScuYipeSW1nPLhdsxcJQzMsepfZShQzlE2ekY+5RX21NAkcLnK7CG3WihPw0czpikDhOTC1q2yVSo4H+luxdNl/aVRd0/IShS04zPG3wl9oNcoZ8YGQGDQWB2bfE+qKbyDFDTVWWh+z6y17Z+Itaqkx2C4hjZ66AjvnYzwpUF8XlbcXjFajfnOGtbIz80W8nhBcozHkOtGoOjFFnHvtZJDLNmhLpyI9Qgp2F+EKMV2ccx0HqauHgAGi3EwHz2oP5vRyUQqpQqhWZnQsDD+uFGCQZt5oL6kC2bG5gkiqzrBNL+CV4rSGNfTmojl6zLc21bTlqYV3IqaAMxBpaFCAG0OBbh6kyz+0GAephTGFBV/Zy/b/ja8EBnlNXYv4BZX06+pqf87y3DbZ18yYBQ=
   on:
     tags: true
-    repo: Turbo87/webpack-notifier
+    repo: inoyakaigor/webpack-notifier
