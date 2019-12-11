@@ -70,7 +70,7 @@ WebpackNotifierPlugin.prototype.compileEndOptions = function(stats) {
         };
 
     } else {
-        return;
+        return {}
     }
 
     this.lastBuildSucceeded = false;
@@ -98,23 +98,22 @@ WebpackNotifierPlugin.prototype.compileEndOptions = function(stats) {
 WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
     var {message, contentImage, status} = this.compileEndOptions(stats);
     if (message) {
-        var title = this.options.title
+        var title = this.options.title ? this.options.title : 'Webpack'
         if (typeof title === 'function') {
             title = title({message: message, status: status})
         }
 
-        notifier.notify(Object.assign(
-            {
-                title: 'Webpack',
-                message: message,
-                contentImage: contentImage,
-                icon: (os.platform() === 'win32' || os.platform() === 'linux') ? contentImage : undefined
-            },
-            this.options,
-            {
-                title: title,
-            }
-        ));
+        var icon = (os.platform() === 'win32' || os.platform() === 'linux')
+        ? contentImage
+        : undefined
+
+        notifier.notify({
+            ...this.options,
+            title,
+            message,
+            contentImage,
+            icon
+        });
     }
 };
 
