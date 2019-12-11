@@ -60,10 +60,6 @@ Title shown in the notification.
 new WebpackNotifierPlugin({title: 'Webpack'});
 ```
 
-### Dynamic title
-
-Your own title for notify
-
 ```js
 var path = require('path');
 

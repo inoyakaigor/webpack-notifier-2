@@ -8,6 +8,7 @@ v2.0.0
 - Add `onlyOnError` option ([#51](https://github.com/Turbo87/webpack-notifier/pull/51)
 - Add support for title function for dynamic titles ([#53](https://github.com/Turbo87/webpack-notifier/pull/53)
 - Update node-notifier to v6 ([#56](https://github.com/Turbo87/webpack-notifier/pull/56)
+- Add support set of images for different build status
 
 Minimum supported Node version is 8.3+
 
