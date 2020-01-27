@@ -1,4 +1,4 @@
-# webpack-notifier
+# Webpack notifier 2
 
 [![Build Status](https://img.shields.io/travis/inoyakaigor/webpack-notifier.svg)](https://travis-ci.org/inoyakaigor/webpack-notifier)
 [![npm Version](https://img.shields.io/npm/v/webpack-notifier-2.svg)](https://www.npmjs.com/package/webpack-notifier-2)
