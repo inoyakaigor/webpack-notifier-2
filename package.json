@@ -22,13 +22,13 @@
     "type": "git",
     "url": "https://github.com/inoyakaigor/webpack-notifier.git"
   },
-  "author": "Tobias Bieniek <tobias.bieniek@gmx.de>",
+  "author": "Igor «InoY» Zvaygintsev <inoyakaigor@ya.ru> (https://inoyakaigor.ru)",
   "license": "ISC",
   "dependencies": {
-    "node-notifier": "^6.0.0",
+    "node-notifier": "^7.0.1",
     "strip-ansi": "^6.0.0"
   },
   "devDependencies": {
-    "eslint": "^6.7.2"
+    "eslint": "^7.4.0"
   }
 }
