@@ -1,6 +1,6 @@
 {
   "name": "webpack-notifier-2",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "webpack + node-notifier = build status system notifications",
   "main": "index.js",
   "files": [
@@ -25,10 +25,10 @@
   "author": "Igor «InoY» Zvaygintsev <inoyakaigor@ya.ru> (https://inoyakaigor.ru)",
   "license": "ISC",
   "dependencies": {
-    "node-notifier": "^7.0.1",
+    "node-notifier": "^8.0.0",
     "strip-ansi": "^6.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.4.0"
+    "eslint": "7.13"
   }
 }
