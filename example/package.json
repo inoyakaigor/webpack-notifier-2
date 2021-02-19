@@ -6,7 +6,10 @@
     "watch": "webpack -w"
   },
   "devDependencies": {
-    "webpack": "^1.5.3"
+    "webpack": "^5.4.0"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "webpack-cli": "^4.2.0"
+  }
 }
