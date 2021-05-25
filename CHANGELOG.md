@@ -1,6 +1,11 @@
 
 Changelog
 ===============================================================================
+v2.3.2
+-------------------------------------------------------------------------------
+Downgrade `strip-ansi` to v6 for fix building issues
+
+
 v2.3.1
 -------------------------------------------------------------------------------
 All version before and include this is only update dependecies, minimal Node version, readme and changelog
